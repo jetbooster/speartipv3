@@ -1,35 +1,66 @@
 import React from 'react';
+
 import {
-  Segment, Rail, Grid, Container, Header,
+  Segment, Grid, Header, Icon,
 } from 'semantic-ui-react';
+import { ResponsiveRail } from '../components/ResponsiveRail';
+import { useBreakpoint } from '../contextProviders/MediaContext';
 
 // import Speartip from '../speartip_bold.svg';
 
-const Home = () => (
-  <>
-    <Container text>
-
-      <Grid verticalAlign="middle" style={{ marginTop: '2em' }}>
+const CV: React.FC = () => {
+  const breakpoint = useBreakpoint();
+  const mobile = breakpoint === 'mobile';
+  return (
+    <>
+      <Grid container className="text" doubling verticalAlign="middle" style={{ paddingTop: '2em' }}>
         <Grid.Row centered>
-          <Grid.Column width={8}>
-            <Header size="huge">Samuel Jarvis</Header>
+          <Grid.Column width={mobile ? 16 : 8}>
+            <Header size="huge" style={{ whiteSpace: 'nowrap' }}>Samuel Jarvis</Header>
           </Grid.Column>
-          <Grid.Column width={6} textAlign="left">
+          <Grid.Column width={mobile ? 16 : 6}>
             <Header subheader>admin@speartipsolutions.co.uk</Header>
           </Grid.Column>
         </Grid.Row>
-        <Grid.Row centered>
-          <Grid.Column />
-          <Grid.Column width={8}><Header subheader>Software Engineer</Header></Grid.Column>
-          <Grid.Column>test</Grid.Column>
+        <Grid.Row centred>
+          {!mobile && <Grid.Column />}
+          <Grid.Column width={mobile ? 16 : 8}>
+            <Header subheader>Software Engineer</Header>
+          </Grid.Column>
+          <Grid.Column width={mobile ? 16 : 6}>
+            <Icon style={{ verticalAlign: 'top', color: '#0a66c2' }} size="large" name="linkedin" />
+            <Header
+              subheader
+              color="blue"
+              as="a"
+              href="https://linkedin.com/in/samuel-jarvis-091392124/"
+              target="_blank"
+              style={{ textDecoration: 'underline' }}
+            >
+              LinkedIn
+            </Header>
+          </Grid.Column>
         </Grid.Row>
+
         <Grid.Row>
           <Grid.Column>
 
             <Segment>
-              <Rail position="left" size="large" close="very">
-                <Segment>Education</Segment>
-              </Rail>
+              <ResponsiveRail text="Intro" />
+              <p>
+                MPhys Physics background. Expert Node.js experience, Strong Java knowledge, with training in Dev Ops, especially AWS and Docker, databases, React and other front end tools, as well as significant knowledge of Fortran and python.
+              </p>
+              <p>{useBreakpoint()}</p>
+            </Segment>
+
+          </Grid.Column>
+        </Grid.Row>
+
+        <Grid.Row>
+          <Grid.Column>
+
+            <Segment>
+              <ResponsiveRail text="Education" />
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nec efficitur orci. Mauris condimentum enim blandit orci aliquam lacinia sed vitae mauris. Aenean ut ultrices dui. Vivamus fringilla vulputate mauris vel pretium. Suspendisse et mi eu urna laoreet placerat in at ex. Maecenas tortor est, sollicitudin vitae dictum ut, egestas eget augue. Vivamus porttitor nunc dictum turpis vehicula sagittis. Aenean vehicula ac erat ac vestibulum. Nulla euismod laoreet metus vitae facilisis. Ut fringilla euismod turpis nec pharetra. Ut ornare nibh quis nulla viverra suscipit.
 
@@ -45,12 +76,11 @@ const Home = () => (
             </Segment>
 
           </Grid.Column>
-
         </Grid.Row>
       </Grid>
-    </Container>
 
-  </>
-);
+    </>
+  );
+};
 
-export default Home;
+export default CV;

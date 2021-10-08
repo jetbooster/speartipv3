@@ -7,7 +7,7 @@ import {
   useLocation,
 } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
-import { createMedia } from '@artsy/fresnel';
+
 import './App.css';
 import {
   Button,
@@ -22,31 +22,19 @@ import {
   Sidebar,
   Visibility,
 } from 'semantic-ui-react';
-import { MediaContextProviderProps, MediaProps } from '@artsy/fresnel/dist/Media';
+
 import Speartip from './speartip_bold.svg';
 import SpeartipFade from './speartip_fade.svg';
 import Home from './Pages/Home';
 import Cv from './Pages/Cv';
 import { useDelayedMount } from './utils/useDelayedMount';
+import { MediaContextProvider, Media, BreakPointProvider } from './contextProviders/MediaContext';
 
 const routes = [
   { path: '/', name: 'Home', Component: Home },
   { path: '/portfolio', name: 'Portfolio', Component: () => <div>Test</div> },
   { path: '/cv', name: 'CV', Component: Cv },
 ];
-
-interface FixedCreateMedia {
-  MediaContextProvider: React.ComponentType<MediaContextProviderProps<'mobile' | 'tablet' | 'desktop'>>
-  Media: React.ComponentType<MediaProps<'mobile' | 'tablet' | 'desktop', never>& {as?:any}>
-}
-
-const { MediaContextProvider, Media }:FixedCreateMedia = createMedia({
-  breakpoints: {
-    mobile: 0,
-    tablet: 768,
-    desktop: 1024,
-  },
-});
 
 interface HeadingProps {
   mobile?:boolean,
@@ -220,7 +208,7 @@ const MobileContainer:FunctionComponent = ({ children }) => {
   const { pathname } = useLocation();
 
   return (
-    <Media as={Sidebar.Pushable} at="mobile">
+    <Media at="mobile">
       <Sidebar.Pushable>
         <Sidebar
           as={Menu}
@@ -250,7 +238,7 @@ const MobileContainer:FunctionComponent = ({ children }) => {
           <Segment
             inverted
             textAlign="center"
-            style={{ minHeight: 300, padding: '1em 0em' }}
+            style={{ padding: '1em 0em' }}
             vertical
           >
             <Container>
@@ -280,32 +268,32 @@ const ResponsiveContainer: FunctionComponent = ({ children }) => (
    * they will be rendered twice for SSR.
    */
   <MediaContextProvider>
-    <DesktopContainer>{children}</DesktopContainer>
-    <MobileContainer>{children}</MobileContainer>
+    <BreakPointProvider>
+      <DesktopContainer>{children}</DesktopContainer>
+      <MobileContainer>{children}</MobileContainer>
+    </BreakPointProvider>
   </MediaContextProvider>
 );
 
 const HomepageLayout = () => (
-  <Router>
-    <ResponsiveContainer>
-      {routes.map(({ path, Component }) => (
-        <Route key={path} exact path={path}>
-          {({ match }) => (
-            <CSSTransition
-              in={match !== null}
-              timeout={300}
-              classNames="page"
-              unmountOnExit
-            >
-              <div className="page">
-                <Component />
-              </div>
-            </CSSTransition>
-          )}
-        </Route>
-      ))}
-    </ResponsiveContainer>
-  </Router>
+  <ResponsiveContainer>
+    {routes.map(({ path, Component }) => (
+      <Route key={path} exact path={path}>
+        {({ match }) => (
+          <CSSTransition
+            in={match !== null}
+            timeout={300}
+            classNames="page"
+            unmountOnExit
+          >
+            <div className="page">
+              <Component />
+            </div>
+          </CSSTransition>
+        )}
+      </Route>
+    ))}
+  </ResponsiveContainer>
 );
 
 const RouterWrapper = () => (

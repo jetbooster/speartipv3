@@ -25,6 +25,7 @@ module.exports = {
     'max-len': [1, { code: 120 }],
     'no-console': 0,
     'react/jsx-filename-extension': [1, { extensions: ['.tsx'] }],
+    'import/prefer-default-export': 0,
     'no-use-before-define': 0,
     '@typescript-eslint/no-use-before-define': ['error'],
     'import/extensions': [

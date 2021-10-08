@@ -37,7 +37,7 @@ const Home = () => (
     </Segment>
 
     <Segment style={{ padding: '0em' }} vertical>
-      <Grid celled="internally" columns="equal" stackable>
+      <Grid celled="internally" columns="equal">
         <Grid.Row textAlign="center">
           <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
             <Header as="h3" style={{ fontSize: '2em' }}>
