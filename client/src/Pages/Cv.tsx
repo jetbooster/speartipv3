@@ -1,12 +1,34 @@
 import React from 'react';
 
 import {
-  Segment, Grid, Header, Icon,
+  Segment, Grid, Header, Icon, Table, List,
 } from 'semantic-ui-react';
 import { ResponsiveRail } from '../components/ResponsiveRail';
 import { useBreakpoint } from '../contextProviders/MediaContext';
+import { ResponsiveGrid } from '../components/ResponsiveGrid';
 
-// import Speartip from '../speartip_bold.svg';
+import Terraform from '../images/terraform.png';
+import Java from '../images/java.png';
+import Ansible from '../images/ansible.png';
+import AWS from '../images/aws.png';
+import Fortran from '../images/fortran.png';
+import Python from '../images/python.png';
+import ReactLogo from '../images/react.png';
+import Docker from '../images/docker.png';
+
+const IconsGrid = (
+  <ResponsiveGrid columns={3}>
+    <Icon style={{ verticalAlign: 'top', color: 'green' }} size="huge" name="node" />
+    <img src={Java} alt="java" />
+    <img src={Python} alt="python" />
+    <img src={Docker} alt="Docker" />
+    <img src={Ansible} alt="ansible" />
+    <img src={Terraform} alt="terraform" />
+    <img src={ReactLogo} alt="React" />
+    <img src={AWS} alt="AWS" />
+    <img src={Fortran} alt="Fortran" />
+  </ResponsiveGrid>
+);
 
 const CV: React.FC = () => {
   const breakpoint = useBreakpoint();
@@ -19,18 +41,18 @@ const CV: React.FC = () => {
             <Header size="huge" style={{ whiteSpace: 'nowrap' }}>Samuel Jarvis</Header>
           </Grid.Column>
           <Grid.Column width={mobile ? 16 : 6}>
-            <Header subheader>admin@speartipsolutions.co.uk</Header>
+            <Header sub>admin@speartipsolutions.co.uk</Header>
           </Grid.Column>
         </Grid.Row>
-        <Grid.Row centred>
+        <Grid.Row>
           {!mobile && <Grid.Column />}
           <Grid.Column width={mobile ? 16 : 8}>
-            <Header subheader>Software Engineer</Header>
+            <Header sub>Software Engineer</Header>
           </Grid.Column>
           <Grid.Column width={mobile ? 16 : 6}>
             <Icon style={{ verticalAlign: 'top', color: '#0a66c2' }} size="large" name="linkedin" />
             <Header
-              subheader
+              sub
               color="blue"
               as="a"
               href="https://linkedin.com/in/samuel-jarvis-091392124/"
@@ -47,10 +69,30 @@ const CV: React.FC = () => {
 
             <Segment>
               <ResponsiveRail text="Intro" />
-              <p>
-                MPhys Physics background. Expert Node.js experience, Strong Java knowledge, with training in Dev Ops, especially AWS and Docker, databases, React and other front end tools, as well as significant knowledge of Fortran and python.
-              </p>
-              <p>{useBreakpoint()}</p>
+              <ResponsiveRail text="Intro" railProps={{ position: 'right' }} RailReplacementItem={IconsGrid} hide />
+              <List size="large" animated>
+                <List.Item>
+                  MPhys Physics background.
+                </List.Item>
+                <List.Item>
+                  Expert Node.js experience, Strong Java knowledge
+                </List.Item>
+                <List.Item>
+                  Strong Experience in Dev Ops, especially Ansible, Terraform, and Docker
+                </List.Item>
+                <List.Item>
+                  Cloud Experience, primarily AWS, but also Azure and Oracle
+                </List.Item>
+                <List.Item>
+                  Databases, including Mongo, SQL, DynamoDB
+                </List.Item>
+                <List.Item>
+                  React and other front end tools,
+                </List.Item>
+                <List.Item>
+                  Significant knowledge of Fortran and python.
+                </List.Item>
+              </List>
             </Segment>
 
           </Grid.Column>
@@ -60,20 +102,55 @@ const CV: React.FC = () => {
           <Grid.Column>
 
             <Segment>
-              <ResponsiveRail text="Education" />
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nec efficitur orci. Mauris condimentum enim blandit orci aliquam lacinia sed vitae mauris. Aenean ut ultrices dui. Vivamus fringilla vulputate mauris vel pretium. Suspendisse et mi eu urna laoreet placerat in at ex. Maecenas tortor est, sollicitudin vitae dictum ut, egestas eget augue. Vivamus porttitor nunc dictum turpis vehicula sagittis. Aenean vehicula ac erat ac vestibulum. Nulla euismod laoreet metus vitae facilisis. Ut fringilla euismod turpis nec pharetra. Ut ornare nibh quis nulla viverra suscipit.
-
-                Phasellus elit tortor, ornare et ligula non, rutrum venenatis mi. Ut aliquam faucibus gravida. Ut ultricies tincidunt diam eu consectetur. Curabitur dui sapien, feugiat sit amet porta a, ornare nec neque. Maecenas iaculis eros id lacinia rutrum. Nullam aliquet volutpat turpis, et pellentesque erat. Morbi eget quam dapibus metus gravida aliquet. Nunc nec tincidunt massa. Phasellus quis tellus luctus justo pharetra sagittis eu eget risus. Morbi tincidunt sem a cursus accumsan. Suspendisse bibendum congue justo sed varius. Pellentesque a justo metus. Suspendisse dui velit, placerat non facilisis scelerisque, aliquam aliquam tellus.
-
-                Donec a pharetra orci. Donec feugiat, metus non ultrices vehicula, nulla arcu hendrerit tellus, eget tempus odio magna a ex. Proin vulputate eleifend tellus ut posuere. In tincidunt rutrum massa quis viverra. Praesent tincidunt commodo lectus, eu consectetur ante accumsan ut. Suspendisse condimentum nisl quis molestie ultrices. Nulla nec tincidunt odio, non bibendum justo. Curabitur molestie magna mi, at lacinia elit dignissim eu. Fusce ut lorem lorem.
-
-                Nulla congue velit sed dui egestas, non convallis erat cursus. In egestas lacus luctus ante semper, interdum cursus erat consequat. Ut hendrerit, sem eget ultrices eleifend, tellus sapien tincidunt sem, id imperdiet ipsum felis eu sapien. Vivamus ligula tellus, pellentesque eget dolor dignissim, molestie bibendum lacus. Proin nec turpis laoreet, bibendum neque et, facilisis enim. Vivamus vel turpis non eros blandit luctus in quis elit. Fusce bibendum consequat velit, non consequat tortor. Cras viverra facilisis ligula, ac elementum libero ullamcorper sit amet. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam eget nulla ut diam rutrum blandit ac eu sem. Morbi luctus non massa in dictum. Cras sodales, tortor sed aliquet tempus, velit diam hendrerit nisi, id ultrices dui ligula quis arcu. Pellentesque vel purus in lacus fermentum commodo sit amet non velit. Mauris ut lorem quis erat porta cursus nec vel risus. Sed iaculis lacus non mi auctor maximus. Praesent posuere, mauris vel eleifend blandit, elit arcu aliquam justo, vitae venenatis arcu nibh et risus.
-
-                Praesent id ultrices ex, vel ultricies odio. Morbi lacinia ipsum lorem, et sodales quam lacinia id. Vestibulum pellentesque semper justo vitae facilisis. Integer eu odio at nisl elementum scelerisque et sit amet ligula. Integer ullamcorper, quam at eleifend scelerisque, nibh felis scelerisque urna, at tempor quam sem et erat. Etiam non cursus metus, quis tincidunt massa. Cras consectetur, arcu vitae pretium suscipit, quam urna faucibus nibh, et gravida lectus lacus in risus. Aenean quis feugiat elit. Curabitur dignissim augue at vulputate volutpat. Suspendisse imperdiet eros sit amet ipsum fringilla, sed posuere ipsum dictum. Nulla viverra ut urna at faucibus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse congue, massa sed lobortis gravida, turpis odio egestas velit, sit amet placerat felis eros at risus. Donec aliquet feugiat orci in mollis. Mauris nec quam ligula.
-
-              </p>
+              <ResponsiveRail text="Work" />
+              The bit I&apos;m avoiding
             </Segment>
+
+          </Grid.Column>
+        </Grid.Row>
+
+        <Grid.Row>
+          <Grid.Column>
+
+            <Table
+              as={Segment}
+              style={{
+                boxShadow: '0 1px 2px 0 rgb(34 36 38 / 15%)',
+                padding: useBreakpoint() !== 'desktop' && '1em 0',
+              }}
+            >
+              <ResponsiveRail text="Education" />
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell>Institution</Table.HeaderCell>
+                  <Table.HeaderCell>Level</Table.HeaderCell>
+                  <Table.HeaderCell>Subject</Table.HeaderCell>
+                  <Table.HeaderCell>Grade</Table.HeaderCell>
+                </Table.Row>
+              </Table.Header>
+              <Table.Body>
+                <Table.Row>
+                  <Table.Cell>University of York</Table.Cell>
+                  <Table.Cell singleLine>Masters Degree (integrated)</Table.Cell>
+                  <Table.Cell>Physics</Table.Cell>
+                  <Table.Cell>2:1</Table.Cell>
+                </Table.Row>
+
+                <Table.Row>
+                  <Table.Cell>McAuley Catholic High School</Table.Cell>
+                  <Table.Cell>A Levels</Table.Cell>
+                  <Table.Cell>Physics, Maths, Further Maths</Table.Cell>
+                  <Table.Cell>A,B,B</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                  <Table.Cell>McAuley Catholic High School</Table.Cell>
+                  <Table.Cell>GCSEs</Table.Cell>
+                  <Table.Cell disabled style={{ fontStyle: 'italic' }}>various</Table.Cell>
+                  <Table.Cell singleLine>5 A*, 7A, 2B, C</Table.Cell>
+
+                </Table.Row>
+              </Table.Body>
+            </Table>
 
           </Grid.Column>
         </Grid.Row>

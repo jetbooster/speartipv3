@@ -21,7 +21,7 @@
     "test": "jest",
     "lint": "eslint src --fix --ext .ts",
     "build": "tsc",
-    "start": "build/server.js",
+    "start": "node build/server.js",
     "start:dev": "ts-node-dev src/server.ts"
   },
   "repository": {

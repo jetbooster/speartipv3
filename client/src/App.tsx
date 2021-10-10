@@ -5,6 +5,7 @@ import {
   Link,
   NavLink,
   useLocation,
+  Switch,
 } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 
@@ -23,8 +24,8 @@ import {
   Visibility,
 } from 'semantic-ui-react';
 
-import Speartip from './speartip_bold.svg';
-import SpeartipFade from './speartip_fade.svg';
+import Speartip from './images/speartip_bold.svg';
+import SpeartipFade from './images/speartip_fade.svg';
 import Home from './Pages/Home';
 import Cv from './Pages/Cv';
 import { useDelayedMount } from './utils/useDelayedMount';
@@ -277,22 +278,23 @@ const ResponsiveContainer: FunctionComponent = ({ children }) => (
 
 const HomepageLayout = () => (
   <ResponsiveContainer>
-    {routes.map(({ path, Component }) => (
-      <Route key={path} exact path={path}>
-        {({ match }) => (
-          <CSSTransition
-            in={match !== null}
-            timeout={300}
-            classNames="page"
-            unmountOnExit
-          >
-            <div className="page">
-              <Component />
-            </div>
-          </CSSTransition>
-        )}
-      </Route>
-    ))}
+    <Switch location={useLocation()}>
+      {routes.map(({ path, Component }) => (
+        <Route key={path} exact path={path}>
+          {({ match }) => (
+            <CSSTransition
+              in={match !== null}
+              timeout={300}
+              classNames="page"
+            >
+              <div className="page">
+                <Component />
+              </div>
+            </CSSTransition>
+          )}
+        </Route>
+      ))}
+    </Switch>
   </ResponsiveContainer>
 );
 

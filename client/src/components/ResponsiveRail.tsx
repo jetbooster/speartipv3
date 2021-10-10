@@ -6,6 +6,8 @@ interface ResponsiveRailProps {
   railProps?: StrictRailProps
   text: string,
   breakpoint?: Breakpoints
+  RailReplacementItem?: React.ReactElement
+  hide?:boolean
 }
 const defaultRailProps: StrictRailProps = {
   position: 'left',
@@ -13,7 +15,9 @@ const defaultRailProps: StrictRailProps = {
   close: 'very',
 };
 
-export const ResponsiveRail = ({ railProps, text, breakpoint }:ResponsiveRailProps) => {
+export const ResponsiveRail = ({
+  railProps, text, RailReplacementItem, breakpoint, hide,
+}:ResponsiveRailProps) => {
   const railPropsFixed = { ...defaultRailProps, ...railProps };
 
   return (
@@ -21,15 +25,19 @@ export const ResponsiveRail = ({ railProps, text, breakpoint }:ResponsiveRailPro
       <Media greaterThan={breakpoint}>
         {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Rail {...railPropsFixed}>
-          <Segment size="huge"><b>{text}</b></Segment>
+          <Segment size="large"><b>{RailReplacementItem || text}</b></Segment>
         </Rail>
       </Media>
-      <Media at={breakpoint}>
-        <h2><b>{text}</b></h2>
-      </Media>
-      <Media lessThan={breakpoint}>
-        <h2><b>{text}</b></h2>
-      </Media>
+      {!hide && (
+        <>
+          <Media at={breakpoint}>
+            <h2 style={{ paddingLeft: '1em' }}><b>{text}</b></h2>
+          </Media>
+          <Media lessThan={breakpoint}>
+            <h2 style={{ paddingLeft: '1em' }}><b>{text}</b></h2>
+          </Media>
+        </>
+      )}
     </>
   );
 };
@@ -37,4 +45,6 @@ export const ResponsiveRail = ({ railProps, text, breakpoint }:ResponsiveRailPro
 ResponsiveRail.defaultProps = {
   railProps: defaultRailProps,
   breakpoint: 'tablet',
+  RailReplacementItem: undefined,
+  hide: false,
 };
