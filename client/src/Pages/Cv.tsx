@@ -15,6 +15,7 @@ import Fortran from '../images/fortran.png';
 import Python from '../images/python.png';
 import ReactLogo from '../images/react.png';
 import Docker from '../images/docker.png';
+import { WorkItem } from '../components/WorkItem';
 
 const IconsGrid = (
   <ResponsiveGrid columns={3}>
@@ -29,6 +30,8 @@ const IconsGrid = (
     <img src={Fortran} alt="Fortran" />
   </ResponsiveGrid>
 );
+
+const bacon = 'Bacon ipsum dolor amet shoulder picanha fatback jowl pastrami buffalo tail pancetta cupim. Pastrami shankle hamburger bresaola cow boudin corned beef tenderloin capicola chicken frankfurter beef ribs. Porchetta drumstick ham hamburger pig alcatra pancetta. Alcatra tongue corned beef pastrami. Corned beef rump short loin, pork loin shankle burgdoggen meatball picanha cow leberkas meatloaf swine pork pig. Kevin shoulder alcatra, tenderloin landjaeger pork loin frankfurter short ribs cow prosciutto. Flank hamburger doner venison pork.';
 
 const CV: React.FC = () => {
   const breakpoint = useBreakpoint();
@@ -70,7 +73,7 @@ const CV: React.FC = () => {
             <Segment>
               <ResponsiveRail text="Intro" />
               <ResponsiveRail text="Intro" railProps={{ position: 'right' }} RailReplacementItem={IconsGrid} hide />
-              <List size="large" animated>
+              <List size="large" animated bulleted>
                 <List.Item>
                   MPhys Physics background.
                 </List.Item>
@@ -103,7 +106,15 @@ const CV: React.FC = () => {
 
             <Segment>
               <ResponsiveRail text="Work" />
-              The bit I&apos;m avoiding
+              <WorkItem jobTitle="Technical Lead" company="BAE Systems" startDate="0519" current>
+                {bacon}
+              </WorkItem>
+              <WorkItem jobTitle="Software Engineer" company="BAE Systems" startDate="0517" endDate="0519">
+                {bacon}
+              </WorkItem>
+              <WorkItem jobTitle="Trainee Software Engineer" company="BAE Systems" startDate="1116" endDate="0517">
+                {bacon}
+              </WorkItem>
             </Segment>
 
           </Grid.Column>

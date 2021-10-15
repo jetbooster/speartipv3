@@ -287,7 +287,7 @@ const HomepageLayout = () => (
               timeout={300}
               classNames="page"
             >
-              <div className="page">
+              <div className="page" style={{ paddingBottom: '2em' }}>
                 <Component />
               </div>
             </CSSTransition>
